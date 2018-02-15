@@ -79,8 +79,8 @@ $pageHeader.append(newDiv);
 
 //     for(let i=0;i<studentsList.length;i++){ //looping trough the student list
 //       student = document.getElementsByClassName('student-item')[i];//
-//       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();//assigning  user name
-//       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();//assigning user email
+//       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();// user name
+//       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();// user email
 
 //       if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){ //checking if the the input value is in either email or name
 //         searchListA.push(student); // if the value is in either one , put the student in the searchListA array.
