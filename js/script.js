@@ -68,42 +68,42 @@ newDiv.appendChild(newInput);
 newDiv.appendChild(newButton);
 $pageHeader.append(newDiv);
 
+// I cant figure out how to display the student/s on the page
+// function searchList(){
 
-function searchList(){
+//     const searchValue = document.getElementsByTagName('input')[0].value; //obtaining the input value
+//     console.log(searchValue)
+//     searchListA = []; //creating an empty array to hold the matched students
+//     studentone = document.getElementsByClassName('student-item')[0];
+//     console.log(studentone)
 
-    const searchValue = document.getElementsByTagName('input')[0].value;
-    console.log(searchValue)
-    searchListA = [];
-    studentone = document.getElementsByClassName('student-item')[0];
-    console.log(studentone)
+//     for(let i=0;i<studentsList.length;i++){ //looping trough the student list
+//       student = document.getElementsByClassName('student-item')[i];//
+//       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();//assigning  user name
+//       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();//assigning user email
 
-    for(let i=0;i<studentsList.length;i++){
-      student = document.getElementsByClassName('student-item')[i];
-      studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();
-      studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();
-
-      if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){
-        searchListA.push(student);
-     }
-   }
-   if (searchListA.length === 0){
-     console.log("0")
-   }else{
-     searchList = searchListA[0]
-     appendPageLinks(searchListA)
-     showPage(pageNum,searchList)
-     console.log(searchList)
-     console.log(searchList.length)
-
-
-   }
-}
+//       if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){ //checking if the the input value is in either email or name
+//         searchListA.push(student); // if the value is in either one , put the student in the searchListA array.
+//      }
+//    }
+//    if (searchListA.length === 0){
+//      console.log("0")
+//    }else{
+//      searchList = searchListA[0]
+//      appendPageLinks(searchListA)
+//      showPage(pageNum,searchList)
+//      console.log(searchList)
+//      console.log(searchList.length)
 
 
-$('button').click(function(){
-    let $pagination = $('.pagination');
-    let $studentlist = $('.student-list')
-    $pagination.hide()
-    $studentlist.hide()
-    searchList()
-})
+//    }
+// }
+
+
+// $('button').click(function(){
+//     let $pagination = $('.pagination');
+//     let $studentlist = $('.student-list')
+//     $pagination.hide()
+//     $studentlist.hide()
+//     searchList()
+// })
