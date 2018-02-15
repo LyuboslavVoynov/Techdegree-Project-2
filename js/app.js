@@ -9,10 +9,10 @@ appendPageLinks(studentsList)
 
 // creates a list of the 10 relevant students for the page argument and displays them on the page
 function showPage(pageNum,studentsList){
-    for(var i=0;i<studentsList.length; i++){
+    for(var i=0;i<studentsList.length; i++){//loops through the whole student list and hides it
       studentsList[i].style.display = 'none';
-
-      if (i>=((pageNum*10)-10) && i<(pageNum*10)){
+        
+      if (i>=((pageNum*10)-10) && i<(pageNum*10)){// checks if the student should be on the page and displays it 
         studentsList[i].style.display = 'block';
     }
   }
