@@ -2,17 +2,17 @@ const studentsList = document.getElementsByClassName("student-item");
 const $page = $('.page');
 const anchor = document.getElementsByTagName('a');
 const $pageHeader = $('.page-header');
-let pageNum = 1
-showPage(pageNum,studentsList)
-appendPageLinks(studentsList)
+
+
 
 // creates a list of the 10 relevant students for the page argument and displays them on the page
 function showPage(pageNum,studentsList){
-    for(var i=0;i<studentsList.length; i++){
-      studentsList[i].style.display = 'none';
+    students = document.getElementsByClassName("student-item"); // list of all students
+    for(var i=0;i<students.length; i++){ //looping through the list of students
+      students[i].style.display = 'none';// hiding all
 
-      if (i>=((pageNum*10)-10) && i<(pageNum*10)){
-        studentsList[i].style.display = 'block';
+      if (i>=((pageNum*10)-10) && i<(pageNum*10)){//if the students should be on the page - display them
+        students[i].style.display = 'block';
     }
   }
 }
@@ -20,12 +20,18 @@ function showPage(pageNum,studentsList){
 function appendPageLinks(studentsList){
   let pageCount = Math.ceil(studentsList.length/10); // calculates the page number
   //dynamically creating pagination
-  let pagination = document.createElement('div');
-  pagination.className = "pagination";
-  let paginationUl = document.createElement('ul');
+  let pagination = document.createElement('div');//creating pagination div
+  pagination.className = "pagination";//setting the classname to pagination
+   //checking for old pagination and removes it
+  if (document.querySelector(".pagination")) {
+      let pageDiv = document.querySelector(".pagination");
+      pageDiv.parentNode.removeChild(pageDiv);
+  }
+
+  let paginationUl = document.createElement('ul');// creating pagination ul element
   pagination.appendChild(paginationUl);
 
-  for(let i=1;i<=pageCount;i++){
+  for(let i=1;i<=pageCount;i++){//creating the relevent number of  pagination buttons
 
     let paginationLi = document.createElement('li');
     let paginationA = document.createElement('a');
@@ -38,7 +44,8 @@ function appendPageLinks(studentsList){
 
   }
 
-  $page.append(pagination);
+  $page.append(pagination);//appends pagination to the page
+  showPage(1,studentsList)//displays the first Page
   anchor[0].className = 'active';
 
   //looping through the pageCount and creating an event listener for the page selected
@@ -68,42 +75,37 @@ newDiv.appendChild(newInput);
 newDiv.appendChild(newButton);
 $pageHeader.append(newDiv);
 
-// I cant figure out how to display the student/s on the page
+//calling appendPageLinks with the student list as argument
+appendPageLinks(studentsList)
+
+
 // function searchList(){
-
-//     const searchValue = document.getElementsByTagName('input')[0].value; //obtaining the input value
-//     console.log(searchValue)
-//     searchListA = []; //creating an empty array to hold the matched students
-//     studentone = document.getElementsByClassName('student-item')[0];
-//     console.log(studentone)
-
-//     for(let i=0;i<studentsList.length;i++){ //looping trough the student list
-//       student = document.getElementsByClassName('student-item')[i];//
-//       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();// user name
-//       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();// user email
-
-//       if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){ //checking if the the input value is in either email or name
-//         searchListA.push(student); // if the value is in either one , put the student in the searchListA array.
+//     let $studentlist = $('.student-list')
+//     $studentlist.hide()
+//     const searchValue = document.getElementsByTagName('input')[0].value;//obtaining the input value
+//     searchListA = [];//creating an empty array to hold the matched students
+//
+//     for(let i=0;i<studentsList.length;i++){
+//       student = document.getElementsByClassName('student-item')[i];
+//       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();//user name
+//       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();//user email
+//
+//       if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){//checking if the the input value is in either email or name
+//         console.log(student);
+//         searchListA.push(student);// if the value is in either one , put the student in the searchListA array.
 //      }
 //    }
 //    if (searchListA.length === 0){
 //      console.log("0")
 //    }else{
-//      searchList = searchListA[0]
 //      appendPageLinks(searchListA)
-//      showPage(pageNum,searchList)
-//      console.log(searchList)
-//      console.log(searchList.length)
-
-
+//      console.log(searchListA)
+//
+//
+//
 //    }
 // }
-
-
+//
 // $('button').click(function(){
-//     let $pagination = $('.pagination');
-//     let $studentlist = $('.student-list')
-//     $pagination.hide()
-//     $studentlist.hide()
 //     searchList()
 // })
