@@ -10,8 +10,8 @@ function showPage(pageNum,studentsList){
     for(var i=0;i<studentsL.length; i++){ //looping through the list of students
       studentsL[i].style.display = 'none';// hiding all
    }
-   for(var i=0;i<studentsList.length;i++){
-     if (i>=((pageNum*10)-10) && i<(pageNum*10)){//if the students should be on the page - display them
+   for(var i=0;i<studentsList.length;i++){//looping through the studentsList
+     if (i>=((pageNum*10)-10) && i<(pageNum*10)){//checking the studentsList argument and displays relevant stdents
        studentsList[i].style.display = 'block';
     }
   }
@@ -48,7 +48,7 @@ function appendPageLinks(studentsList){
 
   showPage(1,studentsList)
 
-  //looping through the pageCount and creating an event listener for the page selected
+  //looping through the pagnation buttons and creating an event listener for the page selected
   for (let i=0;i<pageCount;i++){
     anchor[0].className = 'active';
     anchor[i].addEventListener("click",function(){
@@ -82,36 +82,34 @@ function searchList(){
     searchListA = [];//creating an empty array to hold the matched students
 
     for(let i=0;i<studentsL.length;i++){
-      student = document.getElementsByClassName('student-item')[i];
+      student = document.getElementsByClassName('student-item')[i];// student information
       studentName = document.getElementsByTagName('h3')[i].textContent.toLowerCase();//user name
       studentEmail = document.getElementsByClassName('email')[i].textContent.toLowerCase();//user email
 
       if (studentName.includes(searchValue) || studentEmail.includes(searchValue)){//checking if the the input value is in either email or name
-        console.log(student);
+
         searchListA.push(student);// if the value is in either one , put the student in the searchListA array.
 
      }
    }
 
-   if (searchListA.length === 0) {
+   if (searchListA.length === 0) {//if searchListA is empty, call appendPageLinks with an empty array
        appendPageLinks([]);
-
+       // creating the "no students found " text and displaying it on the page
        const emptySearch = document.createElement("h4");
        emptySearch.textContent = "Sorry, no students were found ...";
        $page.append(emptySearch);
 
-   } else {
+   } else { // call appendPageLinks with the stduents found
      appendPageLinks(searchListA)
-     console.log(searchListA)
    }
 
 }
 
-
+//creating event listener using jQuery
 $('button').click(function(){
     searchList()
 })
-showPage(1,studentsL)
 
 //calling appendPageLinks with the student list as argument
 appendPageLinks(studentsL)
