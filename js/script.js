@@ -1,7 +1,8 @@
+//creating constants
 const studentsL = document.getElementsByClassName("student-item");
-const $page = $('.page');
+const page = document.querySelector('.page');
 const anchor = document.getElementsByTagName('a');
-const $pageHeader = $('.page-header');
+const pageHeader = document.querySelector('.page-header');
 
 
 
@@ -21,8 +22,8 @@ function appendPageLinks(studentsList){
 
   let pageCount = Math.ceil(studentsList.length/10); // calculates the page number
  // checks for old pagination and deletes it
-  if (document.querySelector(".pagination")) {
-      let pageDiv = document.querySelector(".pagination");
+ let pageDiv = document.querySelector(".pagination");
+  if (pageDiv) {
       pageDiv.parentNode.removeChild(pageDiv);
   }
   //dynamically creating pagination
@@ -44,7 +45,7 @@ function appendPageLinks(studentsList){
     paginationUl.appendChild(paginationLi);
 
   }
-  $page.append(pagination);//appends pagination to the page
+  page.appendChild(pagination);//appends pagination to the page
 
   showPage(1,studentsList)
 
@@ -70,11 +71,12 @@ let newInput = document.createElement('input');
 newInput.placeholder = "Search for students...";
 
 let newButton = document.createElement('button');
+newButton.setAttribute("id","button");
 newButton.textContent = "Search";
 
 newDiv.appendChild(newInput);
 newDiv.appendChild(newButton);
-$pageHeader.append(newDiv);
+pageHeader.appendChild(newDiv);
 
 
 function searchList(){
@@ -96,20 +98,27 @@ function searchList(){
    if (searchListA.length === 0) {//if searchListA is empty, call appendPageLinks with an empty array
        appendPageLinks([]);
        // creating the "no students found " text and displaying it on the page
-       const emptySearch = document.createElement("h4");
+       let emptySearch = document.createElement("h2");
        emptySearch.textContent = "Sorry, no students were found ...";
-       $page.append(emptySearch);
+       emptySearch.className = "empty"
+       page.appendChild(emptySearch);
 
-   } else { // call appendPageLinks with the stduents found
+   } else {
+     // call appendPageLinks with the stduents found
      appendPageLinks(searchListA)
+     //checks for old empty search paragraphs and removes them
+     let empty = document.querySelector('.empty');
+     if(empty){
+       empty.parentNode.removeChild(empty);
+     }
+
+
    }
 
 }
 
-//creating event listener using jQuery
-$('button').click(function(){
-    searchList()
-})
+//creating event listener
+document.getElementById("button").addEventListener("click", searchList);
 
 //calling appendPageLinks with the student list as argument
-appendPageLinks(studentsL)
+appendPageLinks(studentsL);
